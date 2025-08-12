@@ -1,6 +1,21 @@
 # Kagi Ken MCP Server
 
-A Node.js MCP server that provides Kagi search and summarization capabilities using the [kagi-ken](https://github.com/czottmann/kagi-ken) package.
+A Node.js MCP server that provides access to Kagi.com services using Kagi session tokens:
+
+- **Search**: Searches Kagi.com and returns structured JSON data matching Kagi's official search API schema
+- **Summarizer**: Uses Kagi's Summarizer to create summaries from URLs or text content
+
+Unlike the official Kagi API which requires API access, this MCP server uses your existing Kagi session to access both search and summarization features.
+
+_"Kagi-ken"_ is a portmanteau of _"Kagi"_ (the service) and _"token"_.
+
+## Why?
+
+The [Kagi API](https://help.kagi.com/kagi/api/overview.html) requires a separate API key, which are invite-only at the moment. If you already have a Kagi subscription and want to programmatically access Kagi's services from LLMs or agents like Claude, this MCP server provides an alternative by:
+
+- Using your existing Kagi session token (no additional API costs)
+- Parsing Kagi's HTML search results into structured JSON (matching official API format)
+- Accessing Kagi's Summarizer for URL and text summarization
 
 ## Features
 
@@ -29,20 +44,7 @@ Summarize content from URLs using the Kagi Summarizer API. Supports various docu
 
 ### Prerequisites
 - Node.js 18 or higher
-- Kagi session token (see [Getting Your Session Token](#getting-your-session-token))
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd kagi-ken-mcp
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+- Kagi session token (see [Authentication](#authentication))
 
 ### Configuration with Claude
 
@@ -84,12 +86,15 @@ The server supports two methods for providing your session token:
 
 **Method 1: Using token file (recommended)**
 ```bash
-claude mcp add kagi-ken-mcp -- npx -y github:czottmann/kagi-ken-mcp
+claude mcp add kagi-ken-mcp --scope user -- npx github:czottmann/kagi-ken-mcp
 ```
 
 **Method 2: Using environment variable**
 ```bash
-claude mcp add kagi-ken-mcp -e KAGI_SESSION_TOKEN="YOUR_SESSION_TOKEN_HERE" -- npx -y github:czottmann/kagi-ken-mcp
+claude mcp add kagi-ken-mcp \
+  --scope user \
+  --env KAGI_SESSION_TOKEN="YOUR_SESSION_TOKEN_HERE" -- \
+  npx -y github:czottmann/kagi-ken-mcp
 ```
 
 To disable Claude Code's built-in web search (optional):
@@ -103,45 +108,21 @@ To disable Claude Code's built-in web search (optional):
 }
 ```
 
-### Getting Your Session Token
 
-1. Go to [Kagi Settings > API](https://kagi.com/settings?p=api)
-2. Copy the "Session Link" 
-3. Extract the `token` parameter value from the URL
+## Authentication
 
-**Save the token:**
+Get your Kagi session token:
 
-**Option 1: Token file (recommended)**
-```bash
-echo "YOUR_TOKEN_HERE" > ~/.kagi_session_token
-```
-
-**Option 2: Environment variable** 
-```bash
-export KAGI_SESSION_TOKEN="YOUR_TOKEN_HERE"
-```
+1. Visit [Kagi Settings](https://kagi.com/settings/user_details) in your browser
+2. Copy the **Session Link**
+3. Extract the `token` value from the link
+4. Use that value as your session token: save to `~/.kagi_session_token`, alternatively pass as `KAGI_SESSION_TOKEN` env variable
 
 The server will automatically try the environment variable first, then fall back to the token file.
 
-### Testing
+> [!WARNING]
+> **Security Note**: Keep your session token private. It provides access to your Kagi account.
 
-**Test token resolution:**
-```bash
-node test-token-resolution.js
-```
-
-**Test the server with a query like:**
-- "Who was Time's 2024 person of the year?" (search)
-- "Summarize this article: https://example.com/article" (summarizer)
-
-### Debugging
-
-Use the MCP Inspector to debug:
-```bash
-npx @modelcontextprotocol/inspector node /absolute/path/to/kagi-ken-mcp/src/index.js
-```
-
-Then access the inspector at `http://localhost:5173`. If using environment variables, add your `KAGI_SESSION_TOKEN` in the environment variables section of the inspector.
 
 ## Development
 
@@ -159,15 +140,36 @@ kagi-ken-mcp/
 └── README.md
 ```
 
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd kagi-ken-mcp
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
 ### Running in Development Mode
 ```bash
 npm run dev
 ```
 
+### Debugging
+
+Use the MCP Inspector to debug:
+```bash
+npx @modelcontextprotocol/inspector node ./src/index.js
+```
+
+Then access the inspector at `http://localhost:5173`. If using environment variables, add your `KAGI_SESSION_TOKEN` in the environment variables section of the inspector.
+
 ## Environment Variables
 
 - `KAGI_SESSION_TOKEN` (optional): Your Kagi session token (fallback: `~/.kagi_session_token` file)
-- `KAGI_SUMMARIZER_ENGINE` (optional): Compatibility variable (may not affect kagi-ken behavior)
 
 ## Token Resolution Priority
 
@@ -201,6 +203,15 @@ The server includes comprehensive error handling:
 3. Make your changes
 4. Test with the MCP Inspector
 5. Submit a pull request
+
+## Author
+
+Carlo Zottmann, <carlo@zottmann.dev>, https://c.zottmann.dev, https://github.com/czottmann.
+
+This project is neither affiliated with nor endorsed by Kagi. I'm just a very happy customer.
+
+> [!TIP]
+> I make Shortcuts-related macOS & iOS productivity apps like [Actions For Obsidian](https://actions.work/actions-for-obsidian), [Browser Actions](https://actions.work/browser-actions) (which adds Shortcuts support for several major browsers), and [BarCuts](https://actions.work/barcuts) (a surprisingly useful contextual Shortcuts launcher). Check them out!
 
 ## License
 
