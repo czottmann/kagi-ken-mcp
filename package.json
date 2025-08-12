@@ -1,0 +1,31 @@
+{
+  "name": "kagi-ken-mcp",
+  "version": "1.0.0",
+  "description": "Kagi MCP server using kagi-ken package",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "kagi-ken-mcp": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --inspect src/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "kagi",
+    "search",
+    "summarizer",
+    "claude"
+  ],
+  "author": "Carlo Zottmann",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "kagi-ken": "github:czottmann/kagi-ken#1.0.0",
+    "zod": "^3.22.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
