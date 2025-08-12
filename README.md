@@ -57,9 +57,9 @@ The server supports two methods for providing your session token:
 ```json
 {
   "mcpServers": {
-    "kagi-ken": {
-      "command": "node",
-      "args": ["/absolute/path/to/kagi-ken-mcp/src/index.js"]
+    "kagi-ken-mcp": {
+      "command": "npx",
+      "args": ["-y", "github:czottmann/kagi-ken-mcp"]
     }
   }
 }
@@ -69,9 +69,9 @@ The server supports two methods for providing your session token:
 ```json
 {
   "mcpServers": {
-    "kagi-ken": {
-      "command": "node",
-      "args": ["/absolute/path/to/kagi-ken-mcp/src/index.js"],
+    "kagi-ken-mcp": {
+      "command": "npx",
+      "args": ["-y", "github:czottmann/kagi-ken-mcp"],
       "env": {
         "KAGI_SESSION_TOKEN": "YOUR_SESSION_TOKEN_HERE"
       }
@@ -84,12 +84,12 @@ The server supports two methods for providing your session token:
 
 **Method 1: Using token file (recommended)**
 ```bash
-claude mcp add kagi-ken -- node /absolute/path/to/kagi-ken-mcp/src/index.js
+claude mcp add kagi-ken-mcp -- npx -y github:czottmann/kagi-ken-mcp
 ```
 
 **Method 2: Using environment variable**
 ```bash
-claude mcp add kagi-ken -e KAGI_SESSION_TOKEN="YOUR_SESSION_TOKEN_HERE" -- node /absolute/path/to/kagi-ken-mcp/src/index.js
+claude mcp add kagi-ken-mcp -e KAGI_SESSION_TOKEN="YOUR_SESSION_TOKEN_HERE" -- npx -y github:czottmann/kagi-ken-mcp
 ```
 
 To disable Claude Code's built-in web search (optional):
