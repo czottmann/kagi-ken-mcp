@@ -5,7 +5,7 @@ A lightweight Node MCP server around the [`kagi-ken` package](https://github.com
 - **Search**: Searches Kagi
 - **Summarizer**: Uses Kagi's Summarizer to create summaries from URLs or text content
 
-Unlike the official Kagi API which requires API access, this MCP server uses your existing Kagi session to access both search and summarization features. (See section [Authentication](#authentication).)
+Unlike the official Kagi API which requires API access, this MCP server uses your existing Kagi session to access both search and summarization features.
 
 _"Kagi-ken"_ is a portmanteau of _"Kagi"_ (the service) and _"token"_.
 
@@ -20,7 +20,7 @@ The [Kagi API](https://help.kagi.com/kagi/api/overview.html) requires a separate
 - **Search**: Fetch web results using Kagi Search with concurrent query processing
 - **Summarization**: Summarize content from URLs with customizable output types and languages
 
-The server supports two methods for using your Kagi session token (see [Authentication](#authentication)), in this order:
+The server supports two methods for using your Kagi session token (see [Installation](#installation)), in this order:
 
 1. `KAGI_SESSION_TOKEN` environment variable
 2. `~/.kagi_session_token` file containing the token string
@@ -35,12 +35,21 @@ It includes comprehensive error handling:
 
 ## Installation
 
-Prerequisites:
+Node.js 22+ is required.
 
-- Node.js 22 or higher
-- Kagi session token (see [Authentication](#authentication))
+### 1. Get Kagi Session Token
 
-### Claude Desktop
+1. Visit [Kagi Settings](https://kagi.com/settings/user_details) in your browser
+2. Copy the **Session Link**
+3. Extract the `token` value from the link
+4. Use that value as your session token: save to `~/.kagi_session_token` (recommended), alternatively pass as `KAGI_SESSION_TOKEN` env variable
+
+The server will automatically try the environment variable first, then fall back to the token file.
+
+> [!WARNING]
+> **Security Note**: Keep your session token private. It provides access to your Kagi account.
+
+### 2.a. Add MCP server to Claude Desktop
 
 Add kagi-ken-mcp to your `claude_desktop_config.json` which you can open from the Claude Desktop app via Settings → Developer → Local MCP Servers → Edit Config.
 
@@ -73,7 +82,7 @@ Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-
 }
 ```
 
-### Claude Code
+### 2.b. Add MCP server to Claude Code
 
 #### Method 1: Using token file (recommended)
 
@@ -105,21 +114,6 @@ To disable Claude Code's built-in web search (optional), set the permission in t
   }
 }
 ```
-
-
-## Authentication
-
-Get your Kagi session token:
-
-1. Visit [Kagi Settings](https://kagi.com/settings/user_details) in your browser
-2. Copy the **Session Link**
-3. Extract the `token` value from the link
-4. Use that value as your session token: save to `~/.kagi_session_token`, alternatively pass as `KAGI_SESSION_TOKEN` env variable
-
-The server will automatically try the environment variable first, then fall back to the token file.
-
-> [!WARNING]
-> **Security Note**: Keep your session token private. It provides access to your Kagi account.
 
 
 ## Usage: Pose query that requires use of a tool
@@ -194,17 +188,6 @@ Then access the inspector at `http://localhost:5173`. If using environment varia
 3. Make your changes
 4. Test with the MCP Inspector
 5. Submit a pull request
-
-
-## Differences from Official Kagi MCP
-
-This implementation uses:
-
-- **Session token** authentication instead of API key
-- **kagi-ken package** instead of direct API calls
-- **Node.js/JavaScript** instead of Python
-
-The tool interfaces and output formats are designed to be compatible with the official Kagi MCP server.
 
 
 ## Author
