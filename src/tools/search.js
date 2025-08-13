@@ -102,7 +102,11 @@ export async function kagiSearchFetch({ queries }) {
  */
 export const searchToolConfig = {
   name: "kagi_search_fetch",
-  description:
-    "Fetch web results based on one or more queries using the Kagi Search API. Use for general search and when the user explicitly tells you to 'fetch' results/information. Results are from all queries given. They are numbered continuously, so that a user may be able to refer to a result by a specific number.",
+  description: `
+    Fetch web results based on one or more queries using the Kagi.com web search engine. Use for
+    general search and when the user explicitly tells you to 'fetch' results/information. Results are
+    from all queries given. They are numbered continuously, so that a user may be able to refer to a
+    result by a specific number.
+    `.replace(/\s+/gs, " ").trim(),
   inputSchema: searchInputSchema,
 };

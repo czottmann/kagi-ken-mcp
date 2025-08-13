@@ -115,7 +115,9 @@ export async function kagiSummarizer(
  */
 export const summarizerToolConfig = {
   name: "kagi_summarizer",
-  description:
-    "Summarize content from a URL using the Kagi Summarizer API. The Summarizer can summarize any document type (text webpage, video, audio, etc.)",
+  description: `
+    Summarize content from a URL using the Kagi.com Summarizer API. The Summarizer can summarize any
+    document type (text webpage, video, audio, etc.)
+    `.replace(/\s+/gs, " ").trim(),
   inputSchema: summarizerInputSchema,
 };
