@@ -7,9 +7,18 @@
   "bin": {
     "kagi-ken-mcp": "src/index.js"
   },
+  "files": [
+    "src/",
+    "package.json",
+    "README.md",
+    "LICENSE.md"
+  ],
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --inspect src/index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   },
   "keywords": [
     "mcp",
@@ -18,14 +27,19 @@
     "summarizer",
     "claude"
   ],
-  "author": "Carlo Zottmann",
+  "author": "Carlo Zottmann <carlo@zottmann.dev>",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "kagi-ken": "github:czottmann/kagi-ken#1.0.0",
     "zod": "^3.22.0"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/czottmann/kagi-ken-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/czottmann/kagi-ken-mcp/issues"
+  },
+  "homepage": "https://github.com/czottmann/kagi-ken-mcp#readme"
 }
