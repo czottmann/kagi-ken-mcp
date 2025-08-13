@@ -109,7 +109,7 @@ To disable Claude Code's built-in web search (optional), set the permission in t
     ],
     "allow": [
       "mcp__kagi-ken-mcp__kagi_search_fetch",
-      "mcp__kagi-ken-mcp__kagi_smmarizer"
+      "mcp__kagi-ken-mcp__kagi_summarizer"
     ]
   }
 }
