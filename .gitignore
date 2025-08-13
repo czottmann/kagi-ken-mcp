@@ -12,6 +12,7 @@ npm-debug.log*
 .npm
 
 # IDE and editor files
+.claude/
 .vscode/
 .idea/
 *.swp
@@ -20,6 +21,3 @@ npm-debug.log*
 # OS generated files
 .DS_Store
 ._*
-
-# Generated output files (this project creates these)
-.claude/
