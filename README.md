@@ -53,7 +53,10 @@ The server will automatically try the environment variable first, then fall back
 
 Add kagi-ken-mcp to your `claude_desktop_config.json` which you can open from the Claude Desktop app via Settings → Developer → Local MCP Servers → Edit Config.
 
-Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-disable-websearch.png) so it'll use this here MCP server.
+Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-disable-websearch.png) so it'll use this here MCP server. And maybe add this to your "Personal preferences" (i.e., system prompt) in Settings:
+
+> For web searches, use kagi-ken-mcp MCP server's `kagi_search_fetch` tool.
+> For summarizing a URL, use the kagi-ken-mcp MCP server's `kagi_summarizer` tool.
 
 #### Method 1: Using token file (recommended)
 ```json
