@@ -53,12 +53,7 @@ The server will automatically try the environment variable first, then fall back
 
 Add kagi-ken-mcp to your `claude_desktop_config.json` which you can open from the Claude Desktop app via Settings → Developer → Local MCP Servers → Edit Config.
 
-Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-disable-websearch.png) so it'll use this here MCP server. And maybe add this to your "Personal preferences" (i.e., system prompt) in Settings:
-
-> For web searches, use kagi-ken-mcp MCP server's `kagi_search_fetch` tool.
-> For summarizing a URL, use the kagi-ken-mcp MCP server's `kagi_summarizer` tool.
-
-#### Method 1: Using token file (recommended)
+#### Option 1: Using token file (recommended)
 ```json
 {
   "mcpServers": {
@@ -70,7 +65,7 @@ Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-
 }
 ```
 
-#### Method 2: Using environment variable
+#### Option 2: Using environment variable
 ```json
 {
   "mcpServers": {
@@ -85,15 +80,24 @@ Afterwards, [disable Claude Desktop's built-in websearch](assets/claude-desktop-
 }
 ```
 
+#### Post-install
+
+[Disable Claude Desktop's built-in websearch](assets/claude-desktop-disable-websearch.png) so it'll use this here MCP server. And maybe add this to your "Personal preferences" (i.e., system prompt) in Settings:
+
+```
+For web searches, use kagi-ken-mcp MCP server's `kagi_search_fetch` tool.
+For summarizing a URL, use the kagi-ken-mcp MCP server's `kagi_summarizer` tool.
+```
+
 ### 2.b. Add MCP server to Claude Code
 
-#### Method 1: Using token file (recommended)
+#### Option 1: Using token file (recommended)
 
 ```bash
 claude mcp add kagi-ken-mcp --scope user -- npx -y github:czottmann/kagi-ken-mcp
 ```
 
-#### Method 2: Using environment variable
+#### Option 2: Using environment variable
 
 ```bash
 claude mcp add kagi-ken-mcp \
@@ -102,7 +106,9 @@ claude mcp add kagi-ken-mcp \
   npx -y github:czottmann/kagi-ken-mcp
 ```
 
-To disable Claude Code's built-in web search (optional), set the permission in the relevant `.claude/settings*.json` file:
+#### Post-install
+
+Disable Claude Code's built-in web search (optional) by setting the permission in the relevant `.claude/settings*.json` file:
 
 ```json
 {
