@@ -13,6 +13,9 @@ export const searchInputSchema = {
   queries: z.array(z.string()).min(1).describe(
     "One or more concise, keyword-focused search queries. Include essential context within each query for standalone use.",
   ),
+  limit: z.number().int().min(1).max(50).optional().describe(
+    "Maximum number of search results per query (default: 10, max: 50)",
+  ),
 };
 
 /**
@@ -21,9 +24,10 @@ export const searchInputSchema = {
  *
  * @param {Object} args - Tool arguments
  * @param {Array<string>} args.queries - Array of search queries
+ * @param {number} [args.limit=10] - Maximum number of search results per query
  * @returns {Promise<Object>} MCP tool response
  */
-export async function kagiSearchFetch({ queries }) {
+export async function kagiSearchFetch({ queries, limit = 10 }) {
   try {
     if (!queries || queries.length === 0) {
       throw new Error("Search called with no queries.");
@@ -36,7 +40,7 @@ export async function kagiSearchFetch({ queries }) {
       if (typeof query !== "string" || query.trim() === "") {
         throw new Error("All queries must be non-empty strings");
       }
-      return search(query.trim(), token);
+      return search(query.trim(), token, limit);
     });
 
     // Wait for all searches to complete with 10 second timeout per search
@@ -106,7 +110,7 @@ export const searchToolConfig = {
     Fetch web results based on one or more queries using the Kagi.com web search engine. Use for
     general search and when the user explicitly tells you to 'fetch' results/information. Results are
     from all queries given. They are numbered continuously, so that a user may be able to refer to a
-    result by a specific number.
+    result by a specific number. Supports optional limit parameter to control results per query.
     `.replace(/\s+/gs, " ").trim(),
   inputSchema: searchInputSchema,
 };
