@@ -1,6 +1,6 @@
 {
   "name": "kagi-ken-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Kagi MCP server using kagi-ken package",
   "type": "module",
   "main": "src/index.js",
@@ -31,7 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "kagi-ken": "github:czottmann/kagi-ken#1.0.0",
+    "kagi-ken": "github:czottmann/kagi-ken#1.2.0",
     "zod": "^3.22.0"
   },
   "repository": {
