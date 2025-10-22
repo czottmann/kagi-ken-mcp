@@ -9,9 +9,6 @@ Unlike the official Kagi API which requires API access, this MCP server uses you
 
 _"Kagi-ken"_ is a portmanteau of _"Kagi"_ (the service) and _"token"_.
 
-<a href="https://glama.ai/mcp/servers/@czottmann/kagi-ken-mcp">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@czottmann/kagi-ken-mcp/badge" alt="kagi-kan-mcp MCP server" />
-</a>
 
 ## Why?
 
@@ -34,6 +31,10 @@ It includes comprehensive error handling:
 - Invalid input validation
 - Environment variable validation  
 - Graceful error formatting
+
+<a href="https://glama.ai/mcp/servers/@czottmann/kagi-ken-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@czottmann/kagi-ken-mcp/badge" alt="kagi-kan-mcp MCP server" />
+</a>
 
 
 ## Installation
