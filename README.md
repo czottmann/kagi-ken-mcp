@@ -15,6 +15,10 @@ _"Kagi-ken"_ is a portmanteau of _"Kagi"_ (the service) and _"token"_.
 The [Kagi API](https://help.kagi.com/kagi/api/overview.html) requires a separate API key, which are invite-only at the moment. If you already have a Kagi subscription but no API access, yet want to programmatically access Kagi's services from LLMs or agents like Claude, this MCP server provides an alternative.
 
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/czottmann-kagi-ken-mcp).
+
 ## Features
 
 - **Search**: Fetch web results using Kagi Search with concurrent query processing
